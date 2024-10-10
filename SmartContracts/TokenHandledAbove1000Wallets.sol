@@ -23,24 +23,10 @@ contract Token is ERC20, Ownable {
     // Custom event for tracking transfers with additional logging
     event TransferLogged(address indexed from, address indexed to, uint256 amount);
 
-    // Hardcoded wallet addresses that will be initialized as whitelisted
-    address[5] public initialWallets = [
-        0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c, // Wallet 1
-        0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C, // Wallet 2
-        0x4B0897b0513fdC7C541B6d9D7E929C4e5364D2dB, // Wallet 3
-        0x583031D1113aD414F02576BD6afaBfb302140225, // Wallet 4
-        0xdD870fA1b7C4700F2BD7f44238821C26f7392148  // Wallet 5
-    ];
 
     // Constructor to initialize the token, owner, and initial whitelisted wallets
     constructor(address initialOwner) ERC20("MyToken", "MTK") Ownable(msg.sender){
         transferOwnership(initialOwner); // Set the initial owner of the contract to `initialOwner`
-        
-        // Whitelist all hardcoded wallets
-        for (uint256 i = 0; i < initialWallets.length; i++) {
-            walletStatus[initialWallets[i]] = WalletStatus.Whitelisted; // Set wallet status to whitelisted
-            emit Whitelisted(initialWallets[i]); // Emit event for each whitelisted wallet
-        }
         
         walletStatus[msg.sender] = WalletStatus.Whitelisted; // Whitelist the owner's wallet
         
