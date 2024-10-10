@@ -15,9 +15,6 @@ contract Token is ERC20, Ownable {
     // Mapping to track the wallet status (blacklisted or whitelisted)
     mapping(address => WalletStatus) public walletStatus;
     
-    // Mapping to track peers each address interacted with
-    mapping(address => address[]) public interactedPeers; 
-
     // Events for logging wallet status changes
     event Whitelisted(address indexed account);
     event Blacklisted(address indexed account);
@@ -62,45 +59,30 @@ contract Token is ERC20, Ownable {
         _;
     }
 
-    // Function to whitelist an account that is currently blacklisted, can only be called by the owner
-    function whitelist(address _account) external onlyOwner {
-        require(walletStatus[_account] == WalletStatus.Blacklisted, "Account is not blacklisted");
-        walletStatus[_account] = WalletStatus.Whitelisted; // Set wallet status to whitelisted
-        
-        // Re-whitelist peers that were blacklisted due to interaction with this account
-        for (uint256 i = 0; i < interactedPeers[_account].length; i++) {
-            address peer = interactedPeers[_account][i];
-            if (walletStatus[peer] == WalletStatus.Blacklisted) {
-                walletStatus[peer] = WalletStatus.Whitelisted; // Set peer status to whitelisted
-                emit Whitelisted(peer); // Emit event for whitelisted peer
-            }
-        }
+    // Function to whitelist multiple accounts at once
+    function whitelist(address[] calldata _accounts) external onlyOwner {
+        for (uint256 i = 0; i < _accounts.length; i++) {
+            address account = _accounts[i];
+            require(walletStatus[account] == WalletStatus.Blacklisted, "Account is not blacklisted");
+            walletStatus[account] = WalletStatus.Whitelisted; // Set wallet status to whitelisted
 
-        emit Whitelisted(_account);
+            emit Whitelisted(account); // Emit event for each whitelisted account
+        }
     }
 
-    // Function to blacklist a whitelisted account, can only be called by the owner
-    function blacklist(address _account) external onlyOwner {
-        require(walletStatus[_account] == WalletStatus.Whitelisted, "Account is already blacklisted");
-        walletStatus[_account] = WalletStatus.Blacklisted; // Set wallet status to blacklisted
+    // Function to blacklist multiple accounts at once
+    function blacklist(address[] calldata _accounts) external onlyOwner {
+        for (uint256 i = 0; i < _accounts.length; i++) {
+            address account = _accounts[i];
+            require(walletStatus[account] == WalletStatus.Whitelisted, "Account is already blacklisted");
+            walletStatus[account] = WalletStatus.Blacklisted; // Set wallet status to blacklisted
 
-        // Blacklist peers that interacted with this account
-        for (uint256 i = 0; i < interactedPeers[_account].length; i++) {
-            address peer = interactedPeers[_account][i];
-            if (walletStatus[peer] == WalletStatus.Whitelisted) {
-                walletStatus[peer] = WalletStatus.Blacklisted; // Set peer status to blacklisted
-                emit Blacklisted(peer); // Emit event for blacklisted peer
-            }
+            emit Blacklisted(account); // Emit event for each blacklisted account
         }
-
-        emit Blacklisted(_account);
     }
 
     // Overriding the transfer function to include whitelist and blacklist checks
     function transfer(address recipient, uint256 amount) public override onlyWhitelisted notBlacklisted(recipient) returns (bool) {
-        // Track interactions between sender and recipient
-        interactedPeers[msg.sender].push(recipient);
-        interactedPeers[recipient].push(msg.sender);
         
         // Emit the custom transfer logging event
         emit TransferLogged(msg.sender, recipient, amount);
