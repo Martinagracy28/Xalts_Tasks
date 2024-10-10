@@ -13,7 +13,7 @@ The **UltraToken** contract has been successfully deployed on the Ethereum Sepol
 ### Important Notes
 
 - Ensure that you are connected to the **Ethereum Sepolia Testnet** in your MetaMask wallet to interact with the contract.
-- Use the contract address provided above for any testing, such as the registration process or other functionalities described in your testing documentation.
+- Use the contract address provided above for any testing, such as the Transfer process or other functionalities described in your testing documentation.
 
 Here are example transactions for the **Blacklist**, and **Transfer** functions on the Ethereum Sepolia Testnet:
 
@@ -21,4 +21,4 @@ Here are example transactions for the **Blacklist**, and **Transfer** functions 
 
 - **Transfer Event Transaction Hash**: [`0x56350d9acf2cd7087974cac35cf63d992200b530190184c289de3dbbbdf6cb83`](https://sepolia.etherscan.io/tx/0x56350d9acf2cd7087974cac35cf63d992200b530190184c289de3dbbbdf6cb83#eventlog)
 
-You can follow the links to view the transaction details, including gas fees, block confirmation, input data, and the status of the respective events on the Ethereum Sepolia Testnet. These links provide a direct look into how the  blacklist, and transfer processes are reflected on-chain.
+You can follow the links to view the transaction details, including gas fees, block confirmation, input data, and the status of the respective events on the Ethereum Sepolia Testnet. These links provide a direct look into how the  blacklist and transfer processes are reflected on-chain.
