@@ -28,11 +28,11 @@ contract Token is ERC20, Ownable {
 
     // Hardcoded wallet addresses that will be initialized as whitelisted
     address[5] public initialWallets = [
-        0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c, // Wallet 1
-        0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C, // Wallet 2
-        0x4B0897b0513fdC7C541B6d9D7E929C4e5364D2dB, // Wallet 3
-        0x583031D1113aD414F02576BD6afaBfb302140225, // Wallet 4
-        0xdD870fA1b7C4700F2BD7f44238821C26f7392148  // Wallet 5
+        0xd72558AB56489747360657ab4802176Ce18B49E5, // Wallet 1
+        0xdc61dE4fED82E2CDbC5E31156c4dA41389Ae1e22, // Wallet 2
+        0xA7FFa83C165A13625B2F1676651b1dED562e42F9, // Wallet 3
+        0x7a9CC1337D476EbD45b67220D79DF615c5A0C509, // Wallet 4
+        0x13f273412e7591e3259ed528CBda3a6FB524CF10  // Wallet 5
     ];
 
     // Constructor to initialize the token, owner, and initial whitelisted wallets
