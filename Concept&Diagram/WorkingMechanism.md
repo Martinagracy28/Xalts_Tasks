@@ -54,7 +54,7 @@ In this section, we leverage the **Web3.js** library to perform batch processing
 
 #### 4.2. Cost Efficiency through Combined Transactions
 - **Gas Optimization**: By batching the function calls, we not only save on gas fees but also improve the efficiency of our contract interactions. This is because each transaction incurs a base fee, and by grouping them, we can significantly reduce redundant costs.
-- **Reducing Network Load**: Fewer transactions mean less congestion on the network, leading to faster confirmations and lower likelihood of transaction failures due to network issues.
+- **Reducing Network Load**: Fewer transactions mean less congestion on the network, leading to faster confirmations and a lower likelihood of transaction failures due to network issues.
 
 ### 5. **Final Output**
 - The processed data is outputted as two separate lists of unique wallet addresses that have interacted with the whitelist and blacklist addresses.
