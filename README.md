@@ -66,7 +66,7 @@ The `Token` contract implements the ERC20 standard and includes functionalities 
 After deploying the contract, you can interact with it directly from the Remix IDE. Here are the key functionalities:
 - **Transfer Tokens**: Whitelisted users can transfer tokens to other whitelisted addresses.
 - **Whitelisting Addresses**: The contract owner can add addresses to the whitelist.
-- **Blacklisting Addresses**: The contract owner can remove addresses from the whitelist by adding them to the blacklist.
+- **Blacklisting Addresses**: The contract owner can remove the addresses from the whitelist by adding them to the blacklist.
 
 ## Events
 The contract emits the following events:
